@@ -7,6 +7,12 @@ using System.Threading.Tasks; // used to build multithreaded application
 
 namespace HelloWorld
 {
+    public enum ShippingMethod
+    {
+        RegularAirMail = 1,
+        RegisteredAirMail = 2,
+        Express = 3
+    }
 
     internal class Program
     {
@@ -53,6 +59,21 @@ namespace HelloWorld
             Calculator calculator = new Calculator();
             var result = calculator.Add(5, 8);
             Console.WriteLine("Result: " + result);
+
+            var method = ShippingMethod.Express;
+            Console.WriteLine((int)method);
+
+            // example if we receive value 3 from somewhere else
+            // can also convert the type to ShippingMethod
+            var methodId = 3;
+            Console.WriteLine((ShippingMethod)method);
+
+            // convert enum to string
+            Console.WriteLine(method.ToString());
+
+            // convert string to enum also called enumeration 
+            var methodName = "Express";
+            var shippinMethod = (ShippingMethod)Enum.Parse(typeof(ShippingMethod), methodName);
         }
     }
 }
