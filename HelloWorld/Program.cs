@@ -1,4 +1,5 @@
-﻿using System; // basic utility classes and primitive types typewriter system
+﻿using HelloWorld.Math;
+using System; // basic utility classes and primitive types typewriter system
 using System.Collections.Generic; // work with list collections
 using System.Linq; // work with data
 using System.Text; // work with text, coding etc
@@ -6,6 +7,7 @@ using System.Threading.Tasks; // used to build multithreaded application
 
 namespace HelloWorld
 {
+
     internal class Program
     {
         static void Main(string[] args)
@@ -29,6 +31,28 @@ namespace HelloWorld
 
             // format string - shows min and max value for byte
             Console.WriteLine("{0} {1}", byte.MinValue, byte.MaxValue);
+
+            // type conversion
+            try
+            {
+                var number1 = "1234";
+                byte b = Convert.ToByte(number1);
+                Console.WriteLine(b);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            var john = new Person();
+            john.FirstName = "John";
+            john.LastName = "Smith";
+            john.Introduce();
+
+            Calculator calculator = new Calculator();
+            var result = calculator.Add(5, 8);
+            Console.WriteLine("Result: " + result);
         }
     }
 }
