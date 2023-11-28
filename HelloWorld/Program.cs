@@ -9,7 +9,7 @@ namespace HelloWorld
 {
     public enum ShippingMethod
     {
-        RegularAirMail = 1,
+        RegularAirMail = 1, // if not set, will start with 0
         RegisteredAirMail = 2,
         Express = 3
     }
@@ -41,7 +41,7 @@ namespace HelloWorld
             // type conversion
             try
             {
-                var number1 = "1234";
+                var number1 = "123";
                 byte b = Convert.ToByte(number1);
                 Console.WriteLine(b);
             }
@@ -66,7 +66,7 @@ namespace HelloWorld
             // example if we receive value 3 from somewhere else
             // can also convert the type to ShippingMethod
             var methodId = 3;
-            Console.WriteLine((ShippingMethod)method);
+            Console.WriteLine((ShippingMethod)methodId);
 
             // convert enum to string
             Console.WriteLine(method.ToString());
@@ -74,6 +74,18 @@ namespace HelloWorld
             // convert string to enum also called enumeration 
             var methodName = "Express";
             var shippinMethod = (ShippingMethod)Enum.Parse(typeof(ShippingMethod), methodName);
+
+            // creating list
+            //var numberList = new List<int>();
+            var numberList = new List<int>() { 1, 2, 3, 4, 5 }; // initialization
+            numberList.Add(1);
+            // whenever see IEnumberable in intellisense, use array or list
+            numberList.AddRange(new int[3] { 6, 7, 8 });
+
+            foreach (var num in numberList)
+            {
+                Console.WriteLine(num);
+            }
         }
     }
 }
