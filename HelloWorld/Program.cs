@@ -18,21 +18,31 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            var dateTime = new DateTime(2015, 1, 1);
-            var now = DateTime.Now;
-            var today = DateTime.Today;
+            // creating time span objects
+            var timeSpan = new TimeSpan(1, 2, 3); // hours/minutes/seconds
 
-            Console.WriteLine("Hour: " + now.Hour + "\n" + "Minute: " + now.Minute);
+            var timeSpan1 = new TimeSpan(1, 0, 0);
+            var timeSpan2 = TimeSpan.FromHours(1);
 
-            var tomorrow = now.AddDays(1);
-            var yesterday = now.AddDays(-1);
+            Console.WriteLine(timeSpan2); // 01:00:00
 
-            Console.WriteLine(now.ToLongDateString()); // Tuesday, 28 November, 2023
-            Console.WriteLine(now.ToShortDateString()); // 28/11/2023
-            Console.WriteLine(now.ToLongTimeString()); // 2:09:01 PM
-            Console.WriteLine(now.ToShortTimeString()); // 2:09 PM
-            Console.WriteLine(now.ToString()); // 28/11/2023 2:10:40 PM
-            Console.WriteLine(now.ToString("yyyy-MM-dd"));
+            var start = DateTime.Now; // returns the current date/time
+            var end = DateTime.Now.AddMinutes(30);
+            var duration = end - start;
+
+            Console.WriteLine("Start: " + start);
+            Console.WriteLine("End: " + end);
+            Console.WriteLine("Duration: " + duration);
+
+            // Properties
+            Console.WriteLine("Minutes: " + timeSpan.Minutes); // return 2
+            // 62.05, from timespan object -> 1 hour: 60 minutes + 2 minutes + (3 sec/60)
+            Console.WriteLine("Total Minutes: " + timeSpan.TotalMinutes);
+
+            // Add
+            // add 8 mins to current timespan object
+            // return Add Example: 01:10:03
+            Console.WriteLine("Add Example: " + timeSpan.Add(TimeSpan.FromMinutes(8)));
         }
     }
 }
