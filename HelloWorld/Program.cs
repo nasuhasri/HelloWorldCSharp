@@ -11,82 +11,92 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            // Exercise - Control Flow
+            // Exercise - Loop
 
             // Exercise 1
-            Console.Write("Enter number: ");
-            var input = Console.ReadLine();
-            var num = int.Parse(input);
+            var countNum = 0;
 
-            if (num >= 1 && num <= 10)
+            for (int i = 1; i <= 100; i++)
             {
-                Console.WriteLine("Valid");
+                if (i % 3 == 0)
+                {
+                    countNum++;
+                }
             }
-            else
-            {
-                Console.WriteLine("Invalid");
-            }
+
+            Console.WriteLine("Number divisible by 3: " + countNum);
 
             // Exercise 2
-            Console.Write("Enter number 1: ");
-            var num1 = Convert.ToInt32(Console.ReadLine());
+            var sum = 0;
 
-            Console.Write("Enter number 2: ");
-            var num2 = Convert.ToInt32(Console.ReadLine());
+            while (true)
+            {
+                Console.Write("Enter number or 'OK' to exit: ");
+                var input = Console.ReadLine();
 
-            if (num1 >= num2)
-            {
-                Console.WriteLine(num1);
+                if (input.ToUpper() == "OK")
+                {
+                    break;
+                }
+
+                var num = int.Parse(input);
+                sum = sum + num;
             }
-            else
-            {
-                Console.WriteLine(num2);
-            }
+
+            Console.WriteLine("Sum of all numbers: " + sum);
 
             // Exercise 3
-            /*
-             * the height of the image is longer than the width - portrait
-             * Images where the width is longer - landscape
-             */
-            Console.Write("Enter width: ");
-            var width = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter number: ");
+            var number = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Enter height: ");
-            var height = Convert.ToInt32(Console.ReadLine());
+            var factorial = 1;
 
-            if (height > width)
+            for (int i = 1; i <= number; i++)
             {
-                Console.WriteLine("Portrait");
+                factorial = factorial * i; ;
             }
-            else
-            {
-                Console.WriteLine("Landscape");
-            }
+
+            Console.WriteLine("Factorial of num {0}: {1}", number, factorial);
 
             // Exercise 4
-            Console.Write("Enter speed limit: ");
-            var speedLimit = Convert.ToInt32(Console.ReadLine());
+            Random rand = new Random();
 
-            Console.Write("Enter speed of car: ");
-            var speedCar = Convert.ToInt32(Console.ReadLine());
+            var randomNum = rand.Next(1, 10);
 
-            if (speedCar < speedLimit)
+            Console.WriteLine("Random number: " + randomNum);
+
+            for (int i = 0; i < 4; i++)
             {
-                Console.WriteLine("Okay");
-            }
-            else
-            {
-                var demeritPoints = (speedCar - speedLimit) / 5;
+                Console.Write("Guess a number: ");
+                var guess = Convert.ToInt32(Console.ReadLine());
 
-                if (demeritPoints < 12)
+                if (guess == randomNum)
                 {
-                    Console.WriteLine("Demerit Points: " + demeritPoints);
-                }
-                else
-                {
-                    Console.WriteLine("License suspended!");
+                    Console.WriteLine("You won!");
+                    break;
                 }
             }
+
+            Console.WriteLine("You have exceeded the chances! You lost.");
+
+            // Exercise 5
+            Console.Write("Enter a series of numbers: ");
+            var inputNumbers = Console.ReadLine();
+
+            var listNumbers = inputNumbers.Split(',');
+
+            var max = 0;
+            for (int i = 0; i < listNumbers.Length; i++)
+            {
+                var intNum = Convert.ToInt32(listNumbers[i]);
+
+                if (intNum > max)
+                {
+                    max = intNum;
+                }
+            }
+
+            Console.WriteLine("Maximum number: " + max);
         }
 
     }
