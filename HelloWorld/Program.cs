@@ -18,74 +18,21 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello my family!");
+            var dateTime = new DateTime(2015, 1, 1);
+            var now = DateTime.Now;
+            var today = DateTime.Today;
 
-            // can also use var so C# will define it automatically
-            byte number = 2;
-            int count = 10;
-            float totalPrice = 20.95f;
-            char character = 'A';
-            string firstName = "Ali";
-            bool isWorking = false;
+            Console.WriteLine("Hour: " + now.Hour + "\n" + "Minute: " + now.Minute);
 
-            Console.WriteLine(number);
-            Console.WriteLine(count);
-            Console.WriteLine(totalPrice);
-            Console.WriteLine(character);
-            Console.WriteLine(firstName);
-            Console.WriteLine(isWorking);
+            var tomorrow = now.AddDays(1);
+            var yesterday = now.AddDays(-1);
 
-            // format string - shows min and max value for byte
-            Console.WriteLine("{0} {1}", byte.MinValue, byte.MaxValue);
-
-            // type conversion
-            try
-            {
-                var number1 = "123";
-                byte b = Convert.ToByte(number1);
-                Console.WriteLine(b);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            var john = new Person();
-            john.FirstName = "John";
-            john.LastName = "Smith";
-            john.Introduce();
-
-            Calculator calculator = new Calculator();
-            var result = calculator.Add(5, 8);
-            Console.WriteLine("Result: " + result);
-
-            var method = ShippingMethod.Express;
-            Console.WriteLine((int)method);
-
-            // example if we receive value 3 from somewhere else
-            // can also convert the type to ShippingMethod
-            var methodId = 3;
-            Console.WriteLine((ShippingMethod)methodId);
-
-            // convert enum to string
-            Console.WriteLine(method.ToString());
-
-            // convert string to enum also called enumeration 
-            var methodName = "Express";
-            var shippinMethod = (ShippingMethod)Enum.Parse(typeof(ShippingMethod), methodName);
-
-            // creating list
-            //var numberList = new List<int>();
-            var numberList = new List<int>() { 1, 2, 3, 4, 5 }; // initialization
-            numberList.Add(1);
-            // whenever see IEnumberable in intellisense, use array or list
-            numberList.AddRange(new int[3] { 6, 7, 8 });
-
-            foreach (var num in numberList)
-            {
-                Console.WriteLine(num);
-            }
+            Console.WriteLine(now.ToLongDateString()); // Tuesday, 28 November, 2023
+            Console.WriteLine(now.ToShortDateString()); // 28/11/2023
+            Console.WriteLine(now.ToLongTimeString()); // 2:09:01 PM
+            Console.WriteLine(now.ToShortTimeString()); // 2:09 PM
+            Console.WriteLine(now.ToString()); // 28/11/2023 2:10:40 PM
+            Console.WriteLine(now.ToString("yyyy-MM-dd"));
         }
     }
 }
