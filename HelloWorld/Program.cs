@@ -18,15 +18,21 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            var fullname = "Mosh Hamedani ";
-            Console.WriteLine("Trim: '{0}'", fullname.Trim());
+            var builder = new StringBuilder();
+            builder.Append('-', 10); // append 10x
+            builder.AppendLine();
+            builder.Append("Header");
+            builder.AppendLine();
+            builder.Append('-', 10);
 
-            float price = 29.95f;
-            Console.WriteLine(price.ToString("C")); // RM29.95
+            var builder1 = new StringBuilder();
+            builder1.Append('-', 10) // append 10x
+                .AppendLine()
+                .Append("Header")
+                .AppendLine()
+                .Append('-', 10);
 
-            var sentence = "This is going to be really really really really really really really really long text";
-            var summary = StringUtility.SummarizeText(sentence, 20);
-            Console.WriteLine(summary);
+            Console.WriteLine(builder);
         }
 
     }
