@@ -23,6 +23,11 @@ namespace HelloWorld
 
             float price = 29.95f;
             Console.WriteLine(price.ToString("C")); // RM29.95
+
+            var sentence = "This is going to be really really really really really really really really long text";
+            var summary = StringUtility.SummarizeText(sentence, 20);
+            Console.WriteLine(summary);
         }
+
     }
 }
