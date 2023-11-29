@@ -12,36 +12,22 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            // File: static method
-            // true - overwite files if existing
-            var path = @"C:\somefile.jpg";
+            Directory.CreateDirectory(@"C:\Users\nasas\folder1");
 
-            File.Copy(@"C:\temp\myfile.jpg", @"D:\temp\myfile.jpg", true);
-            File.Delete(path);
+            // return string -> all files in the current directory and its up directory
+            var files = Directory.GetFiles(@"C:\Users\nasas\source\repos\HelloWorld", "*.sln*", SearchOption.AllDirectories);
 
-            if (File.Exists(path))
+            foreach (var file in files)
             {
-                Console.WriteLine("File exists!");
-            }
-            else
-            {
-                Console.WriteLine("File not exists!");
+                Console.WriteLine(file);
             }
 
-            var content = File.ReadAllText(path); // return string
+            // return only directories
+            var directories = Directory.GetDirectories(@"C:\Users\nasas\source\repos\HelloWorld", "*.*", SearchOption.AllDirectories);
 
-            //FileInfo: instance method
-            var fileInfo = new FileInfo(path);
-            fileInfo.CopyTo(@"C:\Users\nasas\source\repos");
-            fileInfo.Delete();
-
-            if (fileInfo.Exists)
+            foreach (var dir in directories)
             {
-                Console.WriteLine("File exists!");
-            }
-            else
-            {
-                Console.WriteLine("File not exists!");
+                Console.WriteLine(dir);
             }
         }
     }
