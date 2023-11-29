@@ -12,23 +12,54 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            Directory.CreateDirectory(@"C:\Users\nasas\folder1");
+            var numbers = new List<int> { 1, 2 };
+            var smallest = GetSmallests(numbers, 3);
 
-            // return string -> all files in the current directory and its up directory
-            var files = Directory.GetFiles(@"C:\Users\nasas\source\repos\HelloWorld", "*.sln*", SearchOption.AllDirectories);
-
-            foreach (var file in files)
+            foreach (var number in smallest)
             {
-                Console.WriteLine(file);
+                Console.WriteLine(number);
+            }
+        }
+
+        public static List<int> GetSmallests(List<int> list, int count)
+        {
+            // defensive programming
+            if (list == null)
+            {
+                throw new ArgumentNullException("list");
+            }
+             
+            if (count > list.Count || count <= 0)
+            {
+                throw new ArgumentOutOfRangeException("count", "Count should be between 1 and the number of the elements in the list.");
             }
 
-            // return only directories
-            var directories = Directory.GetDirectories(@"C:\Users\nasas\source\repos\HelloWorld", "*.*", SearchOption.AllDirectories);
+            var buffer = new List<int>(list); // pass original list here
+            var smallests = new List<int>();
 
-            foreach (var dir in directories)
+            while (smallests.Count < count)
             {
-                Console.WriteLine(dir);
+                var min = GetSmallest(buffer);
+                smallests.Add(min);
+                buffer.Remove(min);
             }
+
+            return smallests;
+        }
+
+        public static int GetSmallest(List<int> list)
+        {
+            var min = list[0];
+
+            for (var i = 0; i < list.Count; i++)
+            {
+                if (list[i] < min)
+                {
+                    min = list[i];
+                }
+            }
+
+            return min;
         }
     }
 }
