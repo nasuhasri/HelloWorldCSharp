@@ -11,26 +11,40 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("What's your name? ");
-            var name = Console.ReadLine();
-            var reversed = ReverseName(name);
-            Console.WriteLine("Reverse name: " + reversed);
-        }
+            var numbers = new List<int>();
 
-        public static string ReverseName(string name)
-        {
-            var array = new char[name.Length];
-
-            for (var i = name.Length; i > 0; i--)
+            while (true)
             {
-                // 3-3 = 0, 3-1 = 2
-                // so array[0] = name[2]
-                array[name.Length - i] = name[i - 1];
+                Console.WriteLine("Enter a number or 'Quit' to exit: ");
+                var input = Console.ReadLine();
+
+                if (input.ToLower() == "quit") break;
+
+                numbers.Add(Convert.ToInt32(input));
             }
 
-            var reversed = new string(array);
+            var uniques = GetUniqueNumbers(numbers);
 
-            return reversed;
+            Console.WriteLine("Unique numbers: ");
+            foreach (var unique in uniques)
+            {
+                Console.WriteLine(unique);
+            }
+        }
+
+        public static List<int> GetUniqueNumbers(List<int> numbers)
+        {
+            var uniques = new List<int>();
+
+            foreach (var number in numbers)
+            {
+                if (!uniques.Contains(number))
+                {
+                    uniques.Add(number);
+                }
+            }
+
+            return uniques;
         }
     }
 }
