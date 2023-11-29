@@ -1,6 +1,7 @@
 ﻿using HelloWorld.Math;
 using System; // basic utility classes and primitive types typewriter system
 using System.Collections.Generic; // work with list collections
+using System.IO;
 using System.Linq; // work with data
 using System.Text; // work with text, coding etc
 using System.Threading.Tasks; // used to build multithreaded application
@@ -11,40 +12,39 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            var numbers = new List<int>();
+            // File: static method
+            // true - overwite files if existing
+            var path = @"C:\somefile.jpg";
 
-            while (true)
+            File.Copy(@"C:\temp\myfile.jpg", @"D:\temp\myfile.jpg", true);
+            File.Delete(path);
+
+            if (File.Exists(path))
             {
-                Console.WriteLine("Enter a number or 'Quit' to exit: ");
-                var input = Console.ReadLine();
-
-                if (input.ToLower() == "quit") break;
-
-                numbers.Add(Convert.ToInt32(input));
+                Console.WriteLine("File exists!");
+            }
+            else
+            {
+                Console.WriteLine("File not exists!");
             }
 
-            var uniques = GetUniqueNumbers(numbers);
+            var content = File.ReadAllText(path); // return string
 
-            Console.WriteLine("Unique numbers: ");
-            foreach (var unique in uniques)
+            //FileInfo: instance method
+            var fileInfo = new FileInfo(path);
+            fileInfo.CopyTo(@"C:\Users\nasas\source\repos");
+            fileInfo.Delete();
+
+            if (fileInfo.Exists)
             {
-                Console.WriteLine(unique);
+                Console.WriteLine("File exists!");
             }
-        }
-
-        public static List<int> GetUniqueNumbers(List<int> numbers)
-        {
-            var uniques = new List<int>();
-
-            foreach (var number in numbers)
+            else
             {
-                if (!uniques.Contains(number))
-                {
-                    uniques.Add(number);
-                }
+                Console.WriteLine("File not exists!");
             }
 
-            return uniques;
+            fileInfo.re
         }
     }
 }
