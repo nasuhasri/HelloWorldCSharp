@@ -43,8 +43,6 @@ namespace HelloWorld
             {
                 Console.WriteLine("File not exists!");
             }
-
-            fileInfo.re
         }
     }
 }
