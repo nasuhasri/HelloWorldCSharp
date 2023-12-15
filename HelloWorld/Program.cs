@@ -1,6 +1,6 @@
 ﻿using HelloWorld.Math;
 using System; // basic utility classes and primitive types typewriter system
-using System.Collections.Generic; // work with list collections
+using System.Collections.Generic;
 using System.IO;
 using System.Linq; // work with data
 using System.Text; // work with text, coding etc
@@ -12,164 +12,182 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            // Exercise - Array and Lists
-
-            // Exercise 1
-            Exercise1();
-
-            // Exercise 2
-            Exercise2();
-
-            // Exercise 3
-            Exercise3();
-
-            // Exercise 4
-            Exercise4();
-
-            // Exercise 5
-            Exercise5();
-            
+            // Exercise - Working with text
         }
 
         public static void Exercise1()
         {
-            var names = new List<string>();
+            // Exercise 1
+            Console.WriteLine("Enter a few numbers separated by a hyphen (-): ");
+            var input = Console.ReadLine().Split('-');
 
-            while (true)
+            var listNumbers = new List<int>();
+
+            for (int i = 0; i < input.Length; i++)
             {
-                Console.WriteLine("Enter names: ");
-                var input = Console.ReadLine();
+                listNumbers.Add(int.Parse(input[i]));
+            }
 
-                if (string.IsNullOrEmpty(input))
+            var numbers = new int[listNumbers.Count];
+            listNumbers.CopyTo(numbers);
+            Array.Sort(numbers);
+            
+            bool isCons = false;
+
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                var secondElement = numbers[i]; // second element
+                var firstElement = numbers[i - 1]; // first element
+
+                if (secondElement - firstElement == 1)
                 {
+                    isCons = true;
                     break;
                 }
-
-                names.Add(input);
             }
 
-            if (names.Count > 2)
+            if (isCons)
             {
-                Console.WriteLine("{0}, {1} and {2} others like your post.", names[0], names[1], names.Count - 2);
+                Console.WriteLine("Consecutive");
             }
-            else if (names.Count == 2)
+            else
             {
-                Console.WriteLine("{0} and {1} like your post.", names[0], names[1]);
-            }
-            else if (names.Count == 1)
-            {
-                Console.WriteLine("{0} like your post.", names[0]);
+                Console.WriteLine("Not consecutive");
             }
         }
 
         public static void Exercise2()
         {
-            Console.Write("Enter your name: ");
-            var name = Console.ReadLine();
+            Console.WriteLine("Enter numbers separated by a hyphen: ");
+            var input = Console.ReadLine();
 
-            var array = new char[name.Length];
-
-            Console.WriteLine("name length: " + name.Length);
-
-            for (int i = name.Length; i > 0; i--)
+            if (string.IsNullOrWhiteSpace(input))
             {
-                // index start with 2
-                array[name.Length - i] = name[i - 1];
+                return;
             }
+            else
+            {
+                var numbers = input.Split('-');
+                var listNumbers = new List<int>();
 
-            var reversed = new string(array);
-            Console.WriteLine("Reversed name: " + reversed);
+                foreach (var number in numbers)
+                {
+                    var num = Convert.ToInt32(number);
+
+                    if (!listNumbers.Contains(num))
+                    {
+                        listNumbers.Add(num);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Duplicate");
+                    }
+                }
+            }
         }
 
         public static void Exercise3()
         {
-            Console.WriteLine("Enter 5 numbers: ");
-            var numList = new List<int>();
+            Console.WriteLine("Enter a time value in 24 hour format: ");
 
-            while (true)
+            var input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
             {
-                var input = Console.ReadLine();
-                var intInput = Convert.ToInt32(input);
+                Console.WriteLine("Invalid time!");
+            }
 
-                if (!numList.Contains(intInput))
+            var time = input.Split(':');
+
+            if (time.Length != 2)
+            {
+                return;
+            }
+
+            for (int i = 1; i < time.Length; i++)
+            {
+                var hour = int.Parse(time[i - 1]);
+                var minute = int.Parse(time[i]);
+
+                if ((hour >= 0 && hour <= 23) && (minute >= 0 && minute <= 59))
                 {
-                    numList.Add(Convert.ToInt32(input));
+                    Console.WriteLine("Valid time");
                 }
                 else
                 {
-                    Console.WriteLine("Number has been previously entered. Please re-try!");
-                }
-
-                if (numList.Count == 5)
-                {
-                    break;
+                    Console.WriteLine("Invalid time");
                 }
             }
+        }
 
-            numList.Sort();
+        public static bool IsConsecutive(List<int> list)
+        {
+            // create an array of int numbers based on list elements
+            var numbers = new int[list.Count];
+            list.CopyTo(numbers);
+            Array.Sort(numbers);
 
-            for (var i = 0; i < numList.Count; i++)
+            for (int i = 1; i < numbers.Length; i++)
             {
-                Console.WriteLine(numList[i]);
+                Console.WriteLine("------------------");
+                Console.WriteLine("Iteration {0}", i);
+                Console.WriteLine("Numbers [i] ---- {0}", numbers[i]);
+                Console.WriteLine("Numbers [i-1] --- {0}", numbers[i-1]);
+                Console.WriteLine("Numbers[i] - numbers[i-1] ---- {0}", numbers[i] - numbers[i-1]);
+
+                if (numbers[i] - numbers[i - 1] != 1)
+                {
+                    return false;
+                }
             }
+
+            return true;
         }
 
         public static void Exercise4()
         {
-            Console.Write("Enter a number or type 'Quit': ");
+            // Exercise 4
+            Console.Write("Please enter words separated by space: ");
             var input = Console.ReadLine();
 
-            var numList = new List<int>();
+            var elements = input.Split(' ');
+            var strElement = "";
 
-            while (input != "Quit")
+            foreach (var element in elements)
             {
-                var num = Convert.ToInt32(input);
-
-                if (!numList.Contains(num))
-                {
-                    numList.Add(num);
-                }
-
-                Console.Write("Enter a number or type 'Quit': ");
-                input = Console.ReadLine();
+                var result = char.ToUpper(element[0]) + element.Substring(1);
+                strElement += result;
             }
 
-            numList.Sort();
-
-            for (var i = 0; i < numList.Count; i++)
-            {
-                Console.WriteLine(numList[i]);
-            }
+            Console.WriteLine(strElement);
         }
 
         public static void Exercise5()
         {
-            string[] elements;
-            while (true)
+            // Exercise 5
+            Console.WriteLine("Please enter English words: ");
+            var input = Console.ReadLine();
+
+            //var countVowels = 0;
+            //foreach (var character in input)
+            //{
+            //    if (character == 'a' || character == 'e' || character == 'i' || character == 'o' || character == 'u')
+            //    {
+            //        countVowels++;
+            //    }
+            //}
+
+            var vowels = new List<char>(new char[] { 'a', 'e', 'o', 'u', 'i' });
+            var vowelsCount = 0;
+
+            // Note the ToLower() here. This is used to count for both A and a. 
+            foreach (var character in input.ToLower())
             {
-                Console.WriteLine("Enter a list of comma separated numbers: ");
-                var input = Console.ReadLine();
-
-                elements = input.Split(',');
-
-                if (elements.Length >= 5)
-                {
-                    break;
-                }
-
-                Console.WriteLine("Invalid list!");
+                if (vowels.Contains(character))
+                    vowelsCount++;
             }
 
-            var numList = new List<int>();
-
-            foreach (var item in elements)
-            {
-                numList.Add(Convert.ToInt32(item));
-            }
-
-            numList.Sort();
-
-            Console.WriteLine("The three smallest numbers are: {0}, {1}, {2}", numList[0], numList[1], numList[2]);
+            Console.WriteLine("Number of vowels: " + vowelsCount);
         }
     }
 }
